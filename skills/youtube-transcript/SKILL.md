@@ -9,6 +9,15 @@ Use `yt-transcript` to capture YouTube transcripts from structured caption
 tracks. Treat captions as the source of truth; use speech recognition only as an
 explicit fallback.
 
+Default artifact destination:
+
+```sh
+YOUTUBE_TRANSCRIPT_OUT="/Users/hanifcarroll/Library/Mobile Documents/iCloud~md~obsidian/Documents/hanif-md/inbox/youtube"
+```
+
+Use a different `--out` only when the user explicitly requests another
+destination.
+
 ## Start
 
 Verify the installed command:
@@ -40,7 +49,7 @@ Fetch exact-language captions:
 ```sh
 yt-transcript --json fetch "https://www.youtube.com/watch?v=VIDEO_ID" \
   --lang en \
-  --out ./transcripts \
+  --out "$YOUTUBE_TRANSCRIPT_OUT" \
   --formats txt,md,json
 ```
 
@@ -55,7 +64,7 @@ paths for `metadata`, `txt`, `md`, and `json` when `--out` was requested.
 For a newline-delimited URL file:
 
 ```sh
-yt-transcript --json batch urls.txt --out ./transcripts --lang en
+yt-transcript --json batch urls.txt --out "$YOUTUBE_TRANSCRIPT_OUT" --lang en
 ```
 
 Use `--fail-fast` only when partial output would be worse than stopping on the
@@ -95,7 +104,7 @@ speech recognition, or the transcript must be produced despite caption failure:
 
 ```sh
 yt-transcript --json audio-fallback "https://www.youtube.com/watch?v=VIDEO_ID" \
-  --out ./transcripts
+  --out "$YOUTUBE_TRANSCRIPT_OUT"
 ```
 
 This downloads audio and calls `transcribe-audio`, so report that provenance in
@@ -117,5 +126,5 @@ the final answer.
 ```sh
 yt-transcript --json doctor
 yt-transcript --json tracks "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-yt-transcript --json fetch "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --out ./transcripts
+yt-transcript --json fetch "https://www.youtube.com/watch?v=dQw4w9WgXcQ" --out "$YOUTUBE_TRANSCRIPT_OUT"
 ```
