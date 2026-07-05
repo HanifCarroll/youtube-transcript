@@ -1,0 +1,4 @@
+interface:
+  display_name: "YouTube Transcript"
+  short_description: "Fetch source-faithful YouTube transcripts"
+  default_prompt: "Use $youtube-transcript to fetch a YouTube transcript and save auditable artifacts."
