@@ -63,6 +63,31 @@ first failed video.
 
 Done when `success_count` and `failure_count` account for every requested URL.
 
+## Cleanup Pass
+
+Run this pass after every successful `fetch`, `batch`, or `audio-fallback` run
+before summarizing or handing off the transcript.
+
+- Treat `transcript.txt`, `transcript.json`, and `metadata.json` as raw source
+  artifacts. Do not edit them.
+- Use the generated `transcript.md` as the source for the readable copy. When
+  cleanup changes are needed, write `transcript-cleaned.md` beside it, or write
+  into the user-requested note path.
+- Break the transcript into readable paragraphs by topic, speaker turn, or
+  natural pause.
+- Apply only high-confidence cleanup: repeated caption fragments, obvious line
+  break damage, punctuation, product-name casing, and clear caption
+  misrecognitions where the intended phrase is obvious from transcript context.
+- Do not guess unclear names, tool names, technical terms, or garbled phrases.
+  Mark them as `Needs source check` in the cleaned copy.
+- Keep the source metadata and raw artifact links in the cleaned Markdown copy.
+- Report the cleaned-copy path, any high-confidence edits made, and any
+  remaining `Needs source check` items.
+
+Done when every successful transcript has either a reviewed `transcript.md` with
+no changes needed or a `transcript-cleaned.md` / requested note containing the
+cleaned readable transcript.
+
 ## Fallback
 
 Use `audio-fallback` only when caption tracks are absent, the user asked for
@@ -83,7 +108,8 @@ the final answer.
 - Keep the requested language exact. Do not broaden `en` to `en.*` silently.
 - Do not infer transcript text from title, description, comments, search
   results, or page text.
-- Do not summarize a transcript until the raw transcript artifact exists.
+- Do not summarize a transcript until the raw transcript artifact exists and the
+  cleanup pass is complete.
 - Keep downloaded media, cookies, and private transcript artifacts out of git.
 
 ## Examples
