@@ -16,3 +16,4 @@ downloads/
 *.webm
 *.vtt
 *.json3
+!tests/fixtures/*.json3
