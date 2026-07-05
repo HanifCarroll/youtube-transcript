@@ -82,8 +82,16 @@ before summarizing or handing off the transcript.
 - Use the generated `transcript.md` as the source for the readable copy. When
   cleanup changes are needed, write `transcript-cleaned.md` beside it, or write
   into the user-requested note path.
+- The cleaned copy should read like writing, not like a caption export. Remove
+  timestamp-per-caption formatting from the cleaned copy, use normal Markdown
+  paragraphs separated by blank lines, and add section headings or speaker
+  labels when they make a long transcript easier to read.
+- Restore punctuation and sentence boundaries by agent review of the transcript
+  context. Do this cleanup yourself; do not rely on a third-party punctuation
+  restoration package unless the user explicitly asks for one.
 - Break the transcript into readable paragraphs by topic, speaker turn, or
-  natural pause.
+  natural pause. Do not hard-wrap lines just because the captions were split
+  that way.
 - Apply only high-confidence cleanup: repeated caption fragments, obvious line
   break damage, punctuation, product-name casing, and clear caption
   misrecognitions where the intended phrase is obvious from transcript context.
